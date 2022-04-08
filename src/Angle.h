@@ -21,6 +21,9 @@ class Angle {
         friend Angle operator- (const Angle& lhs, const Angle& rhs);
         friend Angle operator- (const Angle& lhs, uint8_t rhs);
 
+        Angle& operator+= (const Angle& other);
+        Angle& operator-= (const Angle& other);
+
         Angle& operator++();
         Angle operator++(int);
         Angle& operator--();

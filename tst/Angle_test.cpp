@@ -27,9 +27,21 @@ namespace {
         ASSERT_EQ(c, a + b);
     }
 
+    TEST_P(AngleArithmeticTestsFixture, CompoundAdditionTest) {
+        auto [a, b, c] = GetParam();
+        a += b;
+        ASSERT_EQ(c, a);
+    }
+
     TEST_P(AngleArithmeticTestsFixture, SubtractionTest) {
         auto &[a, b, c] = GetParam();
         ASSERT_EQ(a, c - b);
+    }
+
+    TEST_P(AngleArithmeticTestsFixture, CompoundSubtractionTest) {
+        auto [a, b, c] = GetParam();
+        c -= b;
+        ASSERT_EQ(a, c);
     }
 }
 
