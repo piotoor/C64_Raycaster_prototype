@@ -5,8 +5,7 @@
 class Player
 {
     public:
-        Player() = default;
-        Player(Angle theta, Angle fov, uint8_t x, uint8_t y);
+        Player(Angle theta = 0, Angle fov = 80, uint8_t x = 32, uint8_t y = 32);
         virtual ~Player() = default;
 
         Angle getTheta() const;

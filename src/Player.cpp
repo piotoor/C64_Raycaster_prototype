@@ -18,7 +18,7 @@ std::pair<uint8_t, uint8_t> Player::getPos() const {
 }
 
 void Player::rotatePly(Angle theta) {
-    theta += theta;
+    this->theta += theta;
 }
 
 void Player::movePly(int8_t x, int8_t y) {
