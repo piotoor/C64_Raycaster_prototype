@@ -105,5 +105,42 @@ namespace {
         auto &[angle, expected] = GetParam();
         ASSERT_EQ(angle.getReducedValue(), expected);
     }
+}
 
+namespace {
+    class AngleQuadrantTestsFixture :public ::testing::TestWithParam<std::tuple<Angle, Quadrant>> {
+        public:
+            struct toString {
+                template <class ParamType>
+                std::string operator()(const testing::TestParamInfo<ParamType>& testData) const {
+                    const auto &[angle, expected] = testData.param;
+                    return angle.toString();
+                }
+            };
+    };
+
+    INSTANTIATE_TEST_CASE_P(
+        AngleTests,
+        AngleQuadrantTestsFixture,
+        ::testing::Values(
+                std::make_tuple(0, Quadrant::I),
+                std::make_tuple(64, Quadrant::II),
+                std::make_tuple(128, Quadrant::III),
+                std::make_tuple(192, Quadrant::IV),
+                std::make_tuple(21, Quadrant::I),
+                std::make_tuple(63, Quadrant::I),
+                std::make_tuple(68, Quadrant::II),
+                std::make_tuple(127, Quadrant::II),
+                std::make_tuple(129, Quadrant::III),
+                std::make_tuple(191, Quadrant::III),
+                std::make_tuple(193, Quadrant::IV),
+                std::make_tuple(255, Quadrant::IV)
+        ),
+        AngleQuadrantTestsFixture::toString()
+    );
+
+    TEST_P(AngleQuadrantTestsFixture, getQuadrantTest) {
+        auto &[angle, expected] = GetParam();
+        ASSERT_EQ(angle.getQuadrant(), expected);
+    }
 }
