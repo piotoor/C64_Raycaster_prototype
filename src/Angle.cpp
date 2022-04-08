@@ -74,3 +74,7 @@ Angle Angle::operator--(int) {
     --Angle();
     return old;
 }
+
+bool operator== (const Angle &lhs, const Angle& rhs) {
+    return lhs.getValue() == rhs.getValue();
+}

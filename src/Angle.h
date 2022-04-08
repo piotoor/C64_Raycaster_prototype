@@ -25,6 +25,8 @@ class Angle {
         Angle& operator--();
         Angle operator--(int);
 
+        friend bool operator== (const Angle &lhs, const Angle& rhs);
+
         uint8_t getValue() const;
         uint8_t getReducedValue() const;
         Quadrant getQuadrant() const;
