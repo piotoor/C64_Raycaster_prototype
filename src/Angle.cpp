@@ -62,8 +62,8 @@ Angle& Angle::operator++() {
 }
 
 Angle Angle::operator++(int) {
-    uint8_t old = value;
-    ++Angle();
+    Angle old = value;
+    this->operator++();
     return old;
 }
 
@@ -74,8 +74,8 @@ Angle& Angle::operator--() {
 }
 
 Angle Angle::operator--(int) {
-    uint8_t old = value;
-    --Angle();
+    Angle old = value;
+    this->operator--();
     return old;
 }
 
