@@ -1,11 +1,12 @@
 #include "gtest/gtest.h"
 #include "Player.h"
 #include <memory>
+#include <algorithm>
 
 class PlayerTests : public ::testing::Test {
     protected:
         void SetUp() override {
-            player = std::make_unique<Player>(40, 80, 12, 15);
+            player = std::make_unique<Player>(40, 80, std::make_pair(12, 15));
         }
 
         std::unique_ptr<Player> player;
@@ -38,7 +39,7 @@ namespace {
 
         protected:
             void SetUp() override {
-                player = std::make_unique<Player>(40, 80, 12, 15);
+                player = std::make_unique<Player>(40, 80, std::make_pair(12, 15));
             }
 
             std::unique_ptr<Player> player;
@@ -62,5 +63,48 @@ namespace {
         player->rotatePly(theta);
         ASSERT_EQ(expected, player->getTheta());
     }
+}
 
+namespace {
+    class PlayerMoveTestsFixture :public ::testing::TestWithParam<std::tuple<std::pair<int8_t, int8_t>, std::pair<uint8_t, uint8_t>>> {
+        public:
+            struct toString {
+                template <class ParamType>
+                std::string operator()(const testing::TestParamInfo<ParamType>& testData) const {
+                    const auto &[delta, expected] = testData.param;
+                    const auto &[x, y] = delta;
+
+                    std::string testName = std::to_string((int)x) + "_" + std::to_string((int)y);
+                    std::replace(begin(testName), end(testName), '-', 'n');
+
+                    return testName;
+                }
+            };
+
+        protected:
+            void SetUp() override {
+                player = std::make_unique<Player>(40, 80, std::make_pair(12, 15));
+            }
+
+            std::unique_ptr<Player> player;
+    };
+
+    INSTANTIATE_TEST_CASE_P(
+        PlayerTests,
+        PlayerMoveTestsFixture,
+        ::testing::Values(
+                std::make_tuple(std::make_pair(0, 0), std::make_pair(12, 15)),
+                std::make_tuple(std::make_pair(20, 30), std::make_pair(32, 45)),
+                std::make_tuple(std::make_pair(127, 127), std::make_pair(139, 142)),
+                std::make_tuple(std::make_pair(-12, -15), std::make_pair(0, 0)),
+                std::make_tuple(std::make_pair(-120, -100), std::make_pair(12, 15))
+        ),
+        PlayerMoveTestsFixture::toString()
+    );
+
+    TEST_P(PlayerMoveTestsFixture, MoveTest) {
+        auto &[delta, expected] = GetParam();
+        player->movePly(delta);
+        ASSERT_EQ(expected, player->getPos());
+    }
 }

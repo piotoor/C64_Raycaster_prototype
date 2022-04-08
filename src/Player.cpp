@@ -1,7 +1,7 @@
 #include "Player.h"
 
 
-Player::Player(Angle theta, Angle fov, uint8_t x, uint8_t y): theta(theta), fov(fov), x(x), y(y) {
+Player::Player(Angle theta, Angle fov, std::pair<uint8_t, uint8_t> pos): theta(theta), fov(fov), pos(pos) {
 
 }
 
@@ -14,19 +14,21 @@ Angle Player::getFov() const {
 }
 
 std::pair<uint8_t, uint8_t> Player::getPos() const {
-    return std::make_pair(x, y);
+    return this->pos;
 }
 
 void Player::rotatePly(Angle theta) {
     this->theta += theta;
 }
 
-void Player::movePly(int8_t x, int8_t y) {
-    if (this->x + x >= 0 and this->x + x < 256) {
-        this->x += x;
+void Player::movePly(std::pair<int8_t, int8_t> delta) {
+    const auto &[x, y] = delta;
+
+    if (pos.first + x >= 0 and pos.first + x < 256) {
+        pos.first += x;
     }
 
-    if (this->y + y >= 0 and this->y + y < 256) {
-        this->y += y;
+    if (pos.second + y >= 0 and pos.second + y < 256) {
+        pos.second += y;
     }
 }
