@@ -2,6 +2,13 @@
 #define ANGLE_H
 #include <cstdint>
 
+enum class Quadrant {
+    I,
+    II,
+    III,
+    IV
+};
+
 class Angle {
     public:
         Angle() = default;
@@ -19,7 +26,8 @@ class Angle {
         Angle operator--(int);
 
         uint8_t getValue() const;
-        uint8_t getReducedValue() const ;
+        uint8_t getReducedValue() const;
+        Quadrant getQuadrant() const;
 
     private:
         void reduce();

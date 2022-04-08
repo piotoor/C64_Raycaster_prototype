@@ -13,6 +13,18 @@ uint8_t Angle::getReducedValue() const {
     return reducedValue;
 }
 
+Quadrant Angle::getQuadrant() const {
+    if (value >= 0 and value < 64) {
+        return Quadrant::I;
+    } else if (value >= 64 and value < 128) {
+        return Quadrant::II;
+    } else if (value >= 128 and value < 192) {
+        return Quadrant::III;
+    } else {
+        return Quadrant::IV;
+    }
+}
+
 void Angle::reduce() {
     if (value >= 64 and value < 128) {
         reducedValue = 128 - value;
