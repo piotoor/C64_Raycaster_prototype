@@ -72,3 +72,38 @@ namespace {
         ASSERT_EQ(b, a);
     }
 }
+
+namespace {
+    class AngleReduceTestsFixture :public ::testing::TestWithParam<std::tuple<Angle, uint8_t>> {
+        public:
+            struct toString {
+                template <class ParamType>
+                std::string operator()(const testing::TestParamInfo<ParamType>& testData) const {
+                    const auto &[angle, expected] = testData.param;
+                    return angle.toString() + "_" + Angle(expected).toString();
+                }
+            };
+    };
+
+    INSTANTIATE_TEST_CASE_P(
+        AngleTests,
+        AngleReduceTestsFixture,
+        ::testing::Values(
+                std::make_tuple(0, 0),
+                std::make_tuple(10, 10),
+                std::make_tuple(64, 64),
+                std::make_tuple(92, 36),
+                std::make_tuple(128, 0),
+                std::make_tuple(156, 28),
+                std::make_tuple(192, 64),
+                std::make_tuple(212, 44)
+        ),
+        AngleReduceTestsFixture::toString()
+    );
+
+    TEST_P(AngleReduceTestsFixture, ReduceTest) {
+        auto &[angle, expected] = GetParam();
+        ASSERT_EQ(angle.getReducedValue(), expected);
+    }
+
+}

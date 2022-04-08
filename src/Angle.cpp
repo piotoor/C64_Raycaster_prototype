@@ -36,6 +36,8 @@ void Angle::reduce() {
         reducedValue = value - 128;
     } else if (value >= 192 and value < 256) {
         reducedValue = 256 - value;
+    } else {
+        reducedValue = value;
     }
 }
 
