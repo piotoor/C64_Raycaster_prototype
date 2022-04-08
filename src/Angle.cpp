@@ -1,7 +1,6 @@
 #include "Angle.h"
 
-Angle::Angle(uint8_t value) {
-    this->value = value;
+Angle::Angle(uint8_t value): value(value) {
     reduce();
 }
 

@@ -12,8 +12,7 @@ enum class Quadrant {
 
 class Angle {
     public:
-        Angle() = default;
-        Angle(uint8_t value);
+        Angle(uint8_t value = 0);
         virtual ~Angle() = default;
 
         friend Angle operator+ (const Angle& lhs, const Angle& rhs);
