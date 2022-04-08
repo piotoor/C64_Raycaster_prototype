@@ -3,12 +3,12 @@
 #include "Angle.h"
 
 namespace {
-    class AngleArithmeticAdditionTestsFixture :public ::testing::TestWithParam<std::tuple<Angle, Angle, uint8_t>> {
+    class AngleArithmeticTestsFixture :public ::testing::TestWithParam<std::tuple<Angle, Angle, uint8_t>> {
     };
 
     INSTANTIATE_TEST_CASE_P(
             AngleTests,
-            AngleArithmeticAdditionTestsFixture,
+            AngleArithmeticTestsFixture,
             ::testing::Values(
                     std::make_tuple(0, 0, 0),
                     std::make_tuple(0, 12, 12),
@@ -21,11 +21,13 @@ namespace {
             )
     );
 
+    TEST_P(AngleArithmeticTestsFixture, AdditionTest) {
+        auto &[a, b, c] = GetParam();
+        ASSERT_EQ(c, a + b);
+    }
 
-
-
-    TEST_P(AngleArithmeticAdditionTestsFixture, AdditionTest) {
-        auto &[a, b, expected] = GetParam();
-        ASSERT_EQ(expected, a + b);
+    TEST_P(AngleArithmeticTestsFixture, SubtractionTest) {
+        auto &[a, b, c] = GetParam();
+        ASSERT_EQ(a, c - b);
     }
 }
