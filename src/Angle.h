@@ -1,6 +1,7 @@
 #ifndef ANGLE_H
 #define ANGLE_H
 #include <cstdint>
+#include <string>
 
 enum class Quadrant {
     I,
@@ -30,6 +31,7 @@ class Angle {
         uint8_t getValue() const;
         uint8_t getReducedValue() const;
         Quadrant getQuadrant() const;
+        std::string toString() const;
 
     private:
         void reduce();

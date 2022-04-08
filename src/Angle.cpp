@@ -25,6 +25,10 @@ Quadrant Angle::getQuadrant() const {
     }
 }
 
+std::string Angle::toString() const {
+    return std::to_string((int)value);
+}
+
 void Angle::reduce() {
     if (value >= 64 and value < 128) {
         reducedValue = 128 - value;
