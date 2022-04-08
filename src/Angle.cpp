@@ -5,11 +5,11 @@ Angle::Angle(uint8_t value) {
     reduce();
 }
 
-uint8_t Angle::getValue() {
+uint8_t Angle::getValue() const {
     return value;
 }
 
-uint8_t Angle::getReducedValue() {
+uint8_t Angle::getReducedValue() const {
     return reducedValue;
 }
 
@@ -24,19 +24,19 @@ void Angle::reduce() {
 }
 
 Angle operator+ (const Angle& lhs, const Angle& rhs) {
-    return Angle(lhs.value() + rhs.value());
+    return Angle(lhs.getValue() + rhs.getValue());
 }
 
 Angle operator+ (const Angle& lhs, uint8_t rhs) {
-    return Angle(lhs.value() + rhs);
+    return Angle(lhs.getValue() + rhs);
 }
 
 Angle operator- (const Angle& lhs, const Angle& rhs) {
-    return Angle(lhs.value() - rhs.value());
+    return Angle(lhs.getValue() - rhs.getValue());
 }
 
 Angle operator- (const Angle& lhs, uint8_t rhs) {
-    return Angle(lhs.value() - rhs);
+    return Angle(lhs.getValue() - rhs);
 }
 
 Angle& Angle::operator++() {

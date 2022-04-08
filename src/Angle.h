@@ -2,7 +2,6 @@
 #define ANGLE_H
 #include <cstdint>
 
-
 class Angle {
     public:
         Angle() = default;
@@ -19,8 +18,8 @@ class Angle {
         Angle& operator--();
         Angle operator--(int);
 
-        uint8_t getValue();
-        uint8_t getReducedValue();
+        uint8_t getValue() const;
+        uint8_t getReducedValue() const ;
 
     private:
         void reduce();
