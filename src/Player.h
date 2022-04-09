@@ -2,8 +2,7 @@
 #define PLAYER_H
 #include "Angle.h"
 
-class Player
-{
+class Player {
     public:
         Player(Angle theta = 0, Angle fov = 80, std::pair<uint8_t, uint8_t> pos = {32, 32});
         virtual ~Player() = default;

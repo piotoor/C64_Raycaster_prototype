@@ -6,8 +6,7 @@
 #include <vector>
 #include <cstdint>
 
-class LookUpTables
-{
+class LookUpTables {
     public:
         LookUpTables() = default;
         LookUpTables(uint16_t m, uint8_t maxX, uint8_t maxTheta);
