@@ -1,5 +1,6 @@
 #include "lutGenerators.h"
 #include <cmath>
+#include <iostream>
 
 namespace lutGenerators {
     std::vector<std::vector<uint32_t>> generateMXOverCos(uint16_t m, uint8_t maxX, uint8_t maxTheta) {
@@ -10,7 +11,7 @@ namespace lutGenerators {
                 if (th == 64 or th == 192) {
                     ans[x][th] = 0xffff;
                 } else {
-                    ans[x][th] = int(m * x / cos(th * M_PI / 128));
+                    ans[x][th] = fminf(0xffff, int(m * x / cos(th * M_PI / 128)));
                 }
             }
         }
@@ -26,7 +27,7 @@ namespace lutGenerators {
                 if (th % 128 == 0) {
                     ans[x][th] = 0xffff;
                 } else {
-                    ans[x][th] = int(m * x / sin(th * M_PI / 128));
+                    ans[x][th] = fminf(0xffff, int(m * x / sin(th * M_PI / 128)));
                 }
             }
         }
