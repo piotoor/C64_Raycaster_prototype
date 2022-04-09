@@ -9,7 +9,6 @@
 class LookUpTables {
     public:
         LookUpTables() = default;
-        LookUpTables(uint16_t m, uint8_t maxX, uint8_t maxTheta);
         virtual ~LookUpTables() = default;
 
         uint32_t getMxOverCos(uint8_t x, const Angle &theta) const;
@@ -17,9 +16,9 @@ class LookUpTables {
         uint32_t getMCos(const Angle &theta) const;
 
     private:
-        std::vector<std::vector<uint32_t>> mxOverCos;
-        std::vector<std::vector<uint32_t>> mxOverSin;
-        std::vector<uint32_t> mCos;
+        std::vector<std::vector<uint32_t>> mxOverCos = lutGenerators::generateMXOverCos(128, 16, 64);
+        std::vector<std::vector<uint32_t>> mxOverSin = lutGenerators::generateMXOverSin(128, 16, 64);
+        std::vector<uint32_t> mCos = lutGenerators::generateMCos(65535, 40);
 };
 
 #endif // LOOKUPTABLES_H
