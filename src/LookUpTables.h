@@ -18,7 +18,7 @@ class LookUpTables {
     private:
         std::vector<std::vector<uint32_t>> mxOverCos = lutGenerators::generateMXOverCos(128, 16, 64);
         std::vector<std::vector<uint32_t>> mxOverSin = lutGenerators::generateMXOverSin(128, 16, 64);
-        std::vector<uint32_t> mCos = lutGenerators::generateMCos(65535, 40);
+        std::vector<uint32_t> mCos = lutGenerators::generateMCos(128, 40);
 };
 
 #endif // LOOKUPTABLES_H
