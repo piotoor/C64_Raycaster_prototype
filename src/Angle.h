@@ -15,11 +15,6 @@ class Angle {
         Angle(uint8_t value = 0);
         virtual ~Angle() = default;
 
-        friend Angle operator+ (const Angle& lhs, const Angle& rhs);
-        friend Angle operator+ (const Angle& lhs, uint8_t rhs);
-        friend Angle operator- (const Angle& lhs, const Angle& rhs);
-        friend Angle operator- (const Angle& lhs, uint8_t rhs);
-
         Angle& operator+= (const Angle& other);
         Angle& operator-= (const Angle& other);
 
@@ -29,6 +24,7 @@ class Angle {
         Angle operator--(int);
 
         friend bool operator== (const Angle &lhs, const Angle& rhs);
+
 
         uint8_t getValue() const;
         uint8_t getReducedValue() const;
@@ -41,5 +37,11 @@ class Angle {
         uint8_t value;
         uint8_t reducedValue;
 };
+
+Angle operator+ (const Angle& lhs, const Angle& rhs);
+Angle operator+ (const Angle& lhs, uint8_t rhs);
+Angle operator- (const Angle& lhs, const Angle& rhs);
+Angle operator- (const Angle& lhs, uint8_t rhs);
+bool operator< (const Angle& lhs, const Angle& rhs);
 
 #endif // ANGLE_H
