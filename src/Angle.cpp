@@ -60,6 +60,10 @@ bool operator< (const Angle& lhs, const Angle& rhs) {
     return lhs.getValue() < rhs.getValue();
 }
 
+Angle operator/ (const Angle& lhs, uint8_t rhs) {
+    return Angle(lhs.getValue() / rhs);
+}
+
 Angle& Angle::operator+= (const Angle& other) {
     value += other.value;
     reduce();

@@ -20,15 +20,15 @@ void Ray::computeInitialParameters() {
     }
 
     if (theta.getQuadrant() == Quadrant::I or theta.getQuadrant() == Quadrant::II) {
-        stepY = -1;
-        initDistY = lut->getMxOverSin(y - gameMap->squareSize * (y / gameMap->squareSize), theta.getReducedValue());
-    } else {
         stepY = 1;
         initDistY = lut->getMxOverSin(gameMap->squareSize * (y / gameMap->squareSize + 1) - y, theta.getReducedValue());
+    } else {
+        stepY = -1;
+        initDistY = lut->getMxOverSin(y - gameMap->squareSize * (y / gameMap->squareSize), theta.getReducedValue());
     }
 
-    dx = lut->getMxOverCos(gameMap->squareSize - 1, theta.getReducedValue());
-    dy = lut->getMxOverSin(gameMap->squareSize - 1, theta.getReducedValue());
+    dx = lut->getMxOverCos(gameMap->squareSize, theta.getReducedValue());
+    dy = lut->getMxOverSin(gameMap->squareSize, theta.getReducedValue());
 }
 
 void Ray::cast() {
@@ -44,7 +44,7 @@ void Ray::cast() {
             mapY += stepY;
             finalDist = initDistY;
         }
-        if (gameMap->board[mapX][mapY] > 0) {
+        if (gameMap->board[mapY][mapX] > 0) {
             hit = true;
         }
     }
@@ -61,8 +61,32 @@ std::pair<uint8_t, uint8_t> Ray::computeVerticalLine(uint8_t screenHeight) {
     }
 
     uint16_t perpDistance = finalDist / 128 * lut->getMCos(finalDistTheta);
-    uint16_t k = 0xFFFF / screenHeight;
+
+    std::cout << (int)perpDistance << " " << std::endl;
+//    {
+//        auto [x, y] = player->getPos();
+//        x /= gameMap->squareSize;
+//        y /= gameMap->squareSize;
+//        for (int i = 0; i < 16; ++i) {  // y
+//            for (int j = 0; j < 16; ++j) {  // x
+//                if (i == mapY and j == mapX) {
+//                    std::cout << "X";
+//                } else if (i == y and j == x) {
+//                    std::cout << "P";
+//                } else if (gameMap->board[i][j]) {
+//                    std::cout << "#";
+//                } else {
+//                    std::cout << ".";
+//                }
+//            }
+//            std::cout << std::endl;
+//        }
+//        std::cout << std::endl;
+//    }
+
+    uint16_t k = 0xFFFF / screenHeight / 2;
     uint8_t lineHeight = screenHeight - perpDistance / k;
+//    lineHeight /= 2;
 
     return std::make_pair<uint8_t, uint8_t>(std::max(0, screenHeight / 2 - lineHeight / 2), std::min(screenHeight / 2 + lineHeight / 2, screenHeight - 1));
 }

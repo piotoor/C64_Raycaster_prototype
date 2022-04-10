@@ -43,5 +43,6 @@ Angle operator+ (const Angle& lhs, uint8_t rhs);
 Angle operator- (const Angle& lhs, const Angle& rhs);
 Angle operator- (const Angle& lhs, uint8_t rhs);
 bool operator< (const Angle& lhs, const Angle& rhs);
+Angle operator/ (const Angle& lhs, uint8_t rhs);
 
 #endif // ANGLE_H
