@@ -50,37 +50,28 @@ void Ray::cast() {
     }
 }
 
-std::pair<uint8_t, uint8_t> Ray::computeVerticalLine(uint8_t screenHeight) {
+
+
+std::tuple<uint8_t, uint8_t, bool> Ray::computeVerticalLine(uint8_t screenHeight) {
     Angle playerTheta = player->getTheta();
     Angle finalDistTheta = playerTheta.getDist(theta);
 
-    uint16_t perpDistance = finalDist / 128 * lut->getMCos(finalDistTheta);
+    uint16_t perpDistance = finalDist / 128 * lut->getCosX128(finalDistTheta);
+    //perpDistance = finalDist;
 
-    std::cout << (int)perpDistance << " ";
-//    {
-//        auto [x, y] = player->getPos();
-//        x /= gameMap->squareSize;
-//        y /= gameMap->squareSize;
-//        for (int i = 0; i < 16; ++i) {  // y
-//            for (int j = 0; j < 16; ++j) {  // x
-//                if (i == mapY and j == mapX) {
-//                    std::cout << "X";
-//                } else if (i == y and j == x) {
-//                    std::cout << "P";
-//                } else if (gameMap->board[i][j]) {
-//                    std::cout << "#";
-//                } else {
-//                    std::cout << ".";
-//                }
-//            }
-//            std::cout << std::endl;
-//        }
-//        std::cout << std::endl;
-//    }
+    uint8_t lineHeight = 0;
+    uint32_t k = 0xFFFF / screenHeight;
+    if (perpDistance < 0xFFFF) {
+        uint8_t rt = perpDistance / k;
+        lineHeight = screenHeight - rt;
+    }
 
-    uint16_t k = 0xFFFF / screenHeight;
-    uint8_t lineHeight = screenHeight - perpDistance / k;
+    std::cout << (int)perpDistance << "(" << (int)lineHeight << ", " << theta.toString()<< ") ";
 //    lineHeight /= 2;
 
-    return std::make_pair<uint8_t, uint8_t>(std::max(0, screenHeight / 2 - lineHeight / 2), std::min(screenHeight / 2 + lineHeight / 2, screenHeight - 1));
+    return std::make_tuple<uint8_t, uint8_t>(std::max(0, screenHeight / 2 - lineHeight / 2), std::min(screenHeight / 2 + lineHeight / 2, screenHeight - 1), horizontal);
+}
+
+std::pair<uint8_t, uint8_t> Ray::getHitPlace() {
+    return std::make_pair(mapX, mapY);
 }

@@ -20,7 +20,7 @@ int main()
     Raycaster raycaster(gameMap, player, lut, screenWidth, screenHeight);
     sf::Clock clock;
 
-    sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "piotoor's raycaster");
+    sf::RenderWindow window(sf::VideoMode(screenWidth * 16, screenHeight * 16), "piotoor's raycaster");
     window.setFramerateLimit(50);
 
     while (window.isOpen())
@@ -54,7 +54,7 @@ int main()
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
-
+//            int8_t dx =
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){

@@ -24,6 +24,10 @@ class Raycaster: public sf::Drawable, public sf::Transformable {
         uint8_t screenHeight;
 
         sf::VertexArray lines = sf::VertexArray(sf::Lines, screenWidth * 2);
+
+        std::vector<std::string> debugMap;
+        void generateDebugMap();
+        void printDebugMap();
 };
 
 #endif // RAYCASTER_H

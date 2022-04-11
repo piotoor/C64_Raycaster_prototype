@@ -5,6 +5,8 @@
 #include "LookUpTables.h"
 #include "Player.h"
 #include <memory>
+#include <vector>
+#include <string>
 
 class Ray {
     public:
@@ -12,7 +14,8 @@ class Ray {
         virtual ~Ray() = default;
 
         void cast();
-        std::pair<uint8_t, uint8_t> computeVerticalLine(uint8_t screenHeight);
+        std::tuple<uint8_t, uint8_t, bool> computeVerticalLine(uint8_t screenHeight);
+        std::pair<uint8_t, uint8_t> getHitPlace();
 
     private:
         void computeInitialParameters();
@@ -26,12 +29,14 @@ class Ray {
         uint8_t mapY = player->getPos().second / gameMap->squareSize;
         uint8_t stepX = 0;
         uint8_t stepY = 0;
-        uint16_t dx = 0;
-        uint16_t dy = 0;
-        uint16_t initDistX = 0;
-        uint16_t initDistY = 0;
-        uint16_t finalDist = 0;
-
+        uint32_t dx = 0;
+        uint32_t dy = 0;
+//        uint16_t initDistX = 0;
+//        uint16_t initDistY = 0;
+//        uint16_t finalDist = 0;
+        uint32_t initDistX = 0;
+        uint32_t initDistY = 0;
+        uint32_t finalDist = 0;
         bool hit = false;
         bool horizontal = false;
 };

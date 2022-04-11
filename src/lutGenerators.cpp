@@ -44,4 +44,14 @@ namespace lutGenerators {
 
         return ans;
     }
+
+    std::vector<uint32_t> generateMSin(uint16_t m, uint8_t maxTheta) {
+        std::vector<uint32_t> ans(maxTheta + 1);
+
+        for (uint8_t th = 0; th <= maxTheta; ++th) {
+            ans[th] = int(m * sin(th * M_PI / 128));
+        }
+
+        return ans;
+    }
 }
