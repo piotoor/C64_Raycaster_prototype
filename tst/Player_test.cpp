@@ -66,7 +66,7 @@ namespace {
 }
 
 namespace {
-    class PlayerMoveTestsFixture :public ::testing::TestWithParam<std::tuple<std::pair<int8_t, int8_t>, std::pair<uint8_t, uint8_t>>> {
+    class PlayerMoveTestsFixture :public ::testing::TestWithParam<std::tuple<PlayerPosDelta, PlayerPos>> {
         public:
             struct toString {
                 template <class ParamType>
