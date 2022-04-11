@@ -52,17 +52,11 @@ void Ray::cast() {
 
 std::pair<uint8_t, uint8_t> Ray::computeVerticalLine(uint8_t screenHeight) {
     Angle playerTheta = player->getTheta();
-    Angle finalDistTheta = 0;
-
-    if (playerTheta < theta) {
-        finalDistTheta = theta - playerTheta;
-    } else {
-        finalDistTheta = playerTheta - theta;
-    }
+    Angle finalDistTheta = playerTheta.getDist(theta);
 
     uint16_t perpDistance = finalDist / 128 * lut->getMCos(finalDistTheta);
 
-    std::cout << (int)perpDistance << " " << std::endl;
+    std::cout << (int)perpDistance << " ";
 //    {
 //        auto [x, y] = player->getPos();
 //        x /= gameMap->squareSize;
@@ -84,7 +78,7 @@ std::pair<uint8_t, uint8_t> Ray::computeVerticalLine(uint8_t screenHeight) {
 //        std::cout << std::endl;
 //    }
 
-    uint16_t k = 0xFFFF / screenHeight / 2;
+    uint16_t k = 0xFFFF / screenHeight;
     uint8_t lineHeight = screenHeight - perpDistance / k;
 //    lineHeight /= 2;
 
