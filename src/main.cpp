@@ -10,7 +10,7 @@
 #include <memory>
 
 constexpr int screenWidth = 40;
-constexpr int screenHeight = 24;
+constexpr int screenHeight = 48;
 
 int main()
 {
@@ -54,11 +54,48 @@ int main()
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
-//            int8_t dx =
+            auto playerTheta = player->getTheta();
+            int dirX = -1;
+            int dirY = -1;
+
+            if (playerTheta.getQuadrant() == Quadrant::I or playerTheta.getQuadrant() == Quadrant::IV) {
+                dirX = 1;
+            }
+
+            if (playerTheta.getQuadrant() == Quadrant::I or playerTheta.getQuadrant() == Quadrant::II) {
+                dirY = 1;
+            }
+
+            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / 4, dirY * lut->getSinX16(playerTheta.getReducedValue()) / 4};
+            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / 4) / gameMap->squareSize;
+            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / 4)  / gameMap->squareSize;
+
+            if (not gameMap->board[playerMapY][playerMapX]) {
+                player->movePly(delta);
+            }
+
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+            auto playerTheta = player->getTheta();
+            int dirX = 1;
+            int dirY = 1;
 
+            if (playerTheta.getQuadrant() == Quadrant::I or playerTheta.getQuadrant() == Quadrant::IV) {
+                dirX = -1;
+            }
+
+            if (playerTheta.getQuadrant() == Quadrant::I or playerTheta.getQuadrant() == Quadrant::II) {
+                dirY = -1;
+            }
+
+            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / 4, dirY * lut->getSinX16(playerTheta.getReducedValue()) / 4};
+            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / 4) / gameMap->squareSize;
+            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / 4)  / gameMap->squareSize;
+
+            if (not gameMap->board[playerMapY][playerMapX]) {
+                player->movePly(delta);
+            }
         }
 
 
