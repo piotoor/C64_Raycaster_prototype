@@ -61,10 +61,7 @@ std::tuple<uint8_t, uint8_t, bool> Ray::computeVerticalLine(uint8_t screenHeight
 
     uint8_t lineHeight = 0;
     uint32_t k = 0xFFFF / screenHeight;
-    if (perpDistance < 0xFFFF) {
-        uint8_t rt = perpDistance / k;
-        lineHeight = screenHeight - rt;
-    }
+    lineHeight = screenHeight - perpDistance / k;
 
     std::cout << (int)perpDistance << "(" << (int)lineHeight << ", " << theta.toString()<< ") ";
 //    lineHeight /= 2;

@@ -83,6 +83,7 @@ void Raycaster::generateDebugMap() {
 void Raycaster::printDebugMap() {
     std::cout << std::endl;
     std::cout << "playerTheta = " << player->getTheta().toString() << std::endl;
+    std::cout << "playerPos = " << (int)player->getPos().first << "; " << (int)player->getPos().second << std::endl;
     std::cout << std::endl;
 
     for (const auto &row: debugMap) {
