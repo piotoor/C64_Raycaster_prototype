@@ -103,3 +103,11 @@ Angle Angle::operator--(int) {
 bool operator== (const Angle &lhs, const Angle& rhs) {
     return lhs.getValue() == rhs.getValue();
 }
+
+Angle Angle::getDist(const Angle& other) {
+    if (*this < other) {
+        return Angle(other - *this);
+    } else {
+        return Angle(*this - other);
+    }
+}

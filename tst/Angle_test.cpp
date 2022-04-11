@@ -18,7 +18,9 @@ namespace {
                 std::make_tuple(255, 256, 255),
                 std::make_tuple(128, 128, 0),
                 std::make_tuple(64, 192, 0),
-                std::make_tuple(12, 248, 4)
+                std::make_tuple(12, 248, 4),
+                std::make_tuple(16, 236, 252),
+                std::make_tuple(16, 220, 236)
         )
     );
 
@@ -154,5 +156,31 @@ namespace {
     TEST_P(AngleQuadrantTestsFixture, getQuadrantTest) {
         auto &[angle, expected] = GetParam();
         ASSERT_EQ(angle.getQuadrant(), expected);
+    }
+}
+
+namespace {
+    class AngleGetDistTestFixture :public ::testing::TestWithParam<std::tuple<Angle, Angle, Angle>> {
+    };
+
+    INSTANTIATE_TEST_CASE_P(
+        AngleTests,
+        AngleGetDistTestFixture,
+        ::testing::Values(
+                std::make_tuple(0, 0, 0),
+                std::make_tuple(10, 0, 10),
+                std::make_tuple(128, 0, 128),
+                std::make_tuple(255, 0, 255),
+                std::make_tuple(255, 254, 1),
+                std::make_tuple(0, 255, 255),
+                std::make_tuple(254, 255, 1),
+                std::make_tuple(230, 45, 185),
+                std::make_tuple(45, 230, 185)
+        )
+    );
+
+    TEST_P(AngleGetDistTestFixture, AdditionTest) {
+        auto [a, b, c] = GetParam();
+        ASSERT_EQ(c, a.getDist(b));
     }
 }

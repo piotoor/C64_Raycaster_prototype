@@ -24,7 +24,7 @@ class Angle {
         Angle operator--(int);
 
         friend bool operator== (const Angle &lhs, const Angle& rhs);
-
+        Angle getDist(const Angle& other);
 
         uint8_t getValue() const;
         uint8_t getReducedValue() const;
