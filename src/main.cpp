@@ -10,7 +10,7 @@
 #include <memory>
 
 constexpr int screenWidth = 40;
-constexpr int screenHeight = 48;
+constexpr int screenHeight = 24;
 
 int main()
 {
@@ -66,9 +66,9 @@ int main()
                 dirY = 1;
             }
 
-            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / 4, dirY * lut->getSinX16(playerTheta.getReducedValue()) / 4};
-            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / 4) / gameMap->squareSize;
-            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / 4)  / gameMap->squareSize;
+            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / 8, dirY * lut->getSinX16(playerTheta.getReducedValue()) / 8};
+            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / 8) / gameMap->squareSize;
+            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / 8)  / gameMap->squareSize;
 
             if (not gameMap->board[playerMapY][playerMapX]) {
                 player->movePly(delta);
@@ -89,9 +89,9 @@ int main()
                 dirY = -1;
             }
 
-            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / 4, dirY * lut->getSinX16(playerTheta.getReducedValue()) / 4};
-            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / 4) / gameMap->squareSize;
-            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / 4)  / gameMap->squareSize;
+            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / 8, dirY * lut->getSinX16(playerTheta.getReducedValue()) / 8};
+            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / 8) / gameMap->squareSize;
+            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / 8)  / gameMap->squareSize;
 
             if (not gameMap->board[playerMapY][playerMapX]) {
                 player->movePly(delta);

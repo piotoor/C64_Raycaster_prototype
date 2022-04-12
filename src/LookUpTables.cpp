@@ -12,6 +12,10 @@ uint32_t LookUpTables::getCosX128(const Angle &theta) const {
     return cosX128[theta.getReducedValue()];
 }
 
+uint32_t LookUpTables::getSinX128(const Angle &theta) const {
+    return sinX128[theta.getReducedValue()];
+}
+
 uint32_t LookUpTables::getCosX16(const Angle& theta) const {
     return cosX16[theta.getReducedValue()];
 }

@@ -39,6 +39,12 @@ class Ray {
         uint32_t finalDist = 0;
         bool hit = false;
         bool horizontal = false;
+
+        uint32_t debugInitDistX = 0;
+        uint32_t debugInitDistY = 0;
+        uint8_t debugX = 0;
+        uint8_t debugY = 0;
+
 };
 
 #endif // RAY_H
