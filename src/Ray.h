@@ -29,14 +29,14 @@ class Ray {
         uint8_t mapY = player->getPos().second / gameMap->squareSize;
         uint8_t stepX = 0;
         uint8_t stepY = 0;
-        uint32_t dx = 0;
-        uint32_t dy = 0;
+        uint16_t dx = 0;
+        uint16_t dy = 0;
 //        uint16_t initDistX = 0;
 //        uint16_t initDistY = 0;
 //        uint16_t finalDist = 0;
-        uint32_t initDistX = 0;
-        uint32_t initDistY = 0;
-        uint32_t finalDist = 0;
+        uint16_t initDistX = 0;
+        uint16_t initDistY = 0;
+        uint16_t finalDist = 0;
         bool hit = false;
         bool horizontal = false;
 
@@ -44,9 +44,6 @@ class Ray {
         uint32_t debugInitDistY = 0;
         uint8_t debugX = 0;
         uint8_t debugY = 0;
-
-        uint8_t rayPosX = 0;
-
 };
 
 #endif // RAY_H

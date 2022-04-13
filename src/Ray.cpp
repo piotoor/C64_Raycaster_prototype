@@ -10,7 +10,6 @@ Ray::Ray(const std::shared_ptr<Player> &player, const Angle &theta, const std::s
 
 void Ray::computeInitialParameters() {
     const auto &[x, y] = player->getPos();
-    rayPosX = x;
 
     if (theta.getQuadrant() == Quadrant::II or theta.getQuadrant() == Quadrant::III) {
         stepX = -1;
@@ -41,6 +40,9 @@ void Ray::cast() {
         if (initDistX <= initDistY) {
             horizontal = true;
             finalDist = initDistX;
+            if (initDistX > 65535 or dx > 65535) {
+                std::cout << "initDistX or dx " << initDistX;
+             }
             initDistX += dx;
 
             mapX += stepX;
@@ -49,6 +51,9 @@ void Ray::cast() {
         } else {
             horizontal = false;
             finalDist = initDistY;
+            if (initDistY > 65535 or dy > 65535) {
+                std::cout << "initDistY or dy " << initDistY;
+            }
             initDistY += dy;
             mapY += stepY;
 
@@ -68,7 +73,7 @@ std::tuple<uint8_t, uint8_t, bool> Ray::computeVerticalLine(uint8_t screenHeight
 
     uint16_t perpDistance = finalDist / 128 * lut->getCosX128(finalDistTheta.getReducedValue());
     uint8_t lineHeight = 0;
-    uint32_t k = 37000 / screenHeight;
+    uint16_t k = 37000 / screenHeight;
     lineHeight = screenHeight - perpDistance / k;
 
 

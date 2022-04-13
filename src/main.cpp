@@ -25,7 +25,6 @@ int main()
 
     while (window.isOpen())
     {
-        window.clear(sf::Color(40, 40, 40));
         window.clear();
 
         sf::Event event;
@@ -40,10 +39,6 @@ int main()
         window.draw(raycaster);
 
         window.display();
-
-//        double moveSpeed = dt.asMilliseconds() / 1000.0 * 5.0;
-//        double rotateSpeed = dt.asMilliseconds() / 1000.0 * 3.0;
-
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
             player->rotatePly(-1);
