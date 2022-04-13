@@ -40,9 +40,6 @@ void Ray::cast() {
         if (initDistX <= initDistY) {
             horizontal = true;
             finalDist = initDistX;
-            if (initDistX > 65535 or dx > 65535) {
-                std::cout << "initDistX or dx " << initDistX;
-             }
             initDistX += dx;
 
             mapX += stepX;
@@ -51,9 +48,6 @@ void Ray::cast() {
         } else {
             horizontal = false;
             finalDist = initDistY;
-            if (initDistY > 65535 or dy > 65535) {
-                std::cout << "initDistY or dy " << initDistY;
-            }
             initDistY += dy;
             mapY += stepY;
 
@@ -78,6 +72,7 @@ std::tuple<uint8_t, uint8_t, bool> Ray::computeVerticalLine(uint8_t screenHeight
 
 
     std::cout << "id=(" << debugInitDistX << ", " << debugInitDistY << ") dlt=(" << dx << ", " << dy << ") ";
+    std::cout << "[finalDistTheta=" << (int)finalDistTheta.getReducedValue() << "], ";
     std::cout << "hit=(" << (int)mapX << "; " << (int)mapY << ") ";
     std::cout << "debug(x,y)=(" << (int)debugX << ", " << (int)debugY << ") ";
     std::cout << "d=" << perpDistance << "(" << finalDist << "), h=" << (int) lineHeight << ", th=" << theta.toString() << "[" << (int)theta.getReducedValue() << "]" << std::endl;;

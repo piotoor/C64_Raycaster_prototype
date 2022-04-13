@@ -27,7 +27,7 @@ void Raycaster::update(sf::Time elapsed) {
     bool prevHorizontal = false;
     for (size_t r = 0; r < screenWidth; ++r) {
 
-        Angle rayTheta = player->getTheta() - player->getFov() / 2 + r;
+        Angle rayTheta = player->getTheta() - player->getFov() / 2 + r ;
 
         Ray ray(player, rayTheta, gameMap, lut);
         ray.cast();
