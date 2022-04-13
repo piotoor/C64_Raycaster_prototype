@@ -16,7 +16,7 @@ int main()
 {
     std::shared_ptr<GameMap> gameMap = std::make_shared<GameMap>();
     std::shared_ptr<LookUpTables> lut = std::make_shared<LookUpTables>();
-    std::shared_ptr<Player> player = std::make_shared<Player>(0, 40, std::make_pair(64, 64));
+    std::shared_ptr<Player> player = std::make_shared<Player>(0, 80, std::make_pair(64, 64));
     Raycaster raycaster(gameMap, player, lut, screenWidth, screenHeight);
     sf::Clock clock;
 

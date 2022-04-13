@@ -7,15 +7,14 @@ Raycaster::Raycaster(const std::shared_ptr<GameMap> &gameMap, const std::shared_
 }
 
 void Raycaster::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    // apply the transform
     states.transform *= getTransform();
 
-    // our particles don't use a texture
     states.texture = NULL;
 
-    // draw the vertex array
     sf::RenderTexture texture;
     texture.create(screenWidth, screenHeight);
+    sf::Color bgColor(32, 32, 32);
+    texture.clear(bgColor);
     texture.draw(lines);
     sf::Sprite sprite(texture.getTexture());
     sprite.scale(16.0f, 16.0f);
@@ -25,12 +24,11 @@ void Raycaster::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 void Raycaster::update(sf::Time elapsed) {
     generateDebugMap();
+    bool prevHorizontal = false;
     for (size_t r = 0; r < screenWidth; ++r) {
-//    int r = 20; {
 
         Angle rayTheta = player->getTheta() - player->getFov() / 2 + r;
 
-//        std::cout << "rayTheta = " << rayTheta.toString() << std::endl;
         Ray ray(player, rayTheta, gameMap, lut);
         ray.cast();
         const auto &[x, y] = ray.getHitPlace();
@@ -39,17 +37,14 @@ void Raycaster::update(sf::Time elapsed) {
         const auto &[lineStart, lineEnd, horizontal] = ray.computeVerticalLine(screenHeight);
         lines[r * 2].position = sf::Vector2f(r, lineStart);
         lines[r * 2 + 1].position = sf::Vector2f(r, lineEnd);
-//        std::cout << "[ " << (int)lineStart << "; " << (int)lineEnd << "]" << std::endl;
 
         sf::Color color = sf::Color::Red;
-        if (horizontal) {
-            color.a = color.a / 2;
-        }
-
         uint8_t lineHeight = lineEnd - lineStart;
 
 
-        //color.a /= colorModifier;
+        if (horizontal) {
+            color.a *= 0.3;
+        }
 
 
         lines[r * 2].color = color;

@@ -45,6 +45,8 @@ class Ray {
         uint8_t debugX = 0;
         uint8_t debugY = 0;
 
+        uint8_t rayPosX = 0;
+
 };
 
 #endif // RAY_H
