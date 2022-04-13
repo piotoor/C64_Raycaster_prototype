@@ -19,10 +19,10 @@ class LookUpTables {
         uint16_t getSinX16(const Angle &theta) const;
 
     private:
-        std::vector<std::vector<uint16_t>> mxOverCos = lutGenerators::generateMXOverCos(128, 16, 64);
-        std::vector<std::vector<uint16_t>> mxOverSin = lutGenerators::generateMXOverSin(128, 16, 64);
-        std::vector<uint16_t> cosX128 = lutGenerators::generateMCos(128, 40);
-        std::vector<uint16_t> sinX128 = lutGenerators::generateMSin(128, 40);
+        std::vector<std::vector<uint16_t>> mxOverCos = lutGenerators::generateMXOverCos(64, 16, 64);
+        std::vector<std::vector<uint16_t>> mxOverSin = lutGenerators::generateMXOverSin(64, 16, 64);
+        std::vector<uint16_t> cosX128 = lutGenerators::generateMCos(64, 40);
+        std::vector<uint16_t> sinX128 = lutGenerators::generateMSin(64, 40);
         std::vector<uint16_t> cosX16 = lutGenerators::generateMCos(16, 64);
         std::vector<uint16_t> sinX16= lutGenerators::generateMSin(16, 64);
 };

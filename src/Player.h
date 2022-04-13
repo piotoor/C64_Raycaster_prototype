@@ -2,8 +2,8 @@
 #define PLAYER_H
 #include "Angle.h"
 
-using PlayerPos = std::pair<uint8_t, uint8_t>;
-using PlayerPosDelta = std::pair<int8_t, int8_t>;
+using PlayerPos = std::pair<uint16_t, uint16_t>;
+using PlayerPosDelta = std::pair<int16_t, int16_t>;
 
 class Player {
     public:

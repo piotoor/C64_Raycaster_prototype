@@ -65,9 +65,9 @@ std::tuple<uint8_t, uint8_t, bool> Ray::computeVerticalLine(uint8_t screenHeight
     Angle playerTheta = player->getTheta();
     Angle finalDistTheta = playerTheta.getDist(theta);
 
-    uint16_t perpDistance = finalDist / 128 * lut->getCosX128(finalDistTheta.getReducedValue());
+    uint16_t perpDistance = finalDist / 64 * lut->getCosX128(finalDistTheta.getReducedValue());
     uint8_t lineHeight = 0;
-    uint16_t k = 37000 / screenHeight;
+    uint16_t k = 40000 / screenHeight;
     lineHeight = screenHeight - perpDistance / k;
 
 

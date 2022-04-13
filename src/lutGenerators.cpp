@@ -9,9 +9,9 @@ namespace lutGenerators {
         for (uint8_t x = 0; x <= maxX; ++x) {
             for (uint8_t th = 0; th <= maxTheta; ++th) {
                 if (th == 64 or th == 192) {
-                    ans[x][th] = 0x7fff;
+                    ans[x][th] = 0x3fff;
                 } else {
-                    ans[x][th] = fminf(0x7fff, int(m * x / cos(th * M_PI / 128)));
+                    ans[x][th] = fminf(0x3fff, int(m * x / cos(th * M_PI / 128)));
                 }
             }
         }
@@ -25,9 +25,9 @@ namespace lutGenerators {
         for (uint8_t x = 0; x <= maxX; ++x) {
             for (uint8_t th = 0; th <= maxTheta; ++th) {
                 if (th % 128 == 0) {
-                    ans[x][th] = 0x7fff;
+                    ans[x][th] = 0x3fff;
                 } else {
-                    ans[x][th] = fminf(0x7fff, int(m * x / sin(th * M_PI / 128)));
+                    ans[x][th] = fminf(0x3fff, int(m * x / sin(th * M_PI / 128)));
                 }
             }
         }

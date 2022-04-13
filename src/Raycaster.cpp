@@ -56,13 +56,13 @@ void Raycaster::update(sf::Time elapsed) {
 
 void Raycaster::generateDebugMap() {
     debugMap.clear();
-    debugMap = std::vector(16, std::string('.', 16));
+    debugMap = std::vector(32, std::string('.', 16));
     auto [x, y] = player->getPos();
     x /= gameMap->squareSize;
     y /= gameMap->squareSize;
 
-    for (int i = 0; i < 16; ++i) {  // y
-        for (int j = 0; j < 16; ++j) {  // x
+    for (int i = 0; i < 32; ++i) {  // y
+        for (int j = 0; j < 32; ++j) {  // x
             if (i == y and j == x) {
                 debugMap[i][j] =  'P';
             } else if (gameMap->board[i][j]) {

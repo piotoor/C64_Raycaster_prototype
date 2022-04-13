@@ -23,11 +23,11 @@ void Player::rotatePly(Angle theta) {
 void Player::movePly(PlayerPosDelta delta) {
     const auto &[x, y] = delta;
 
-    if (pos.first + x >= 0 and pos.first + x < 256) {
+    if (pos.first + x >= 0 and pos.first + x < 512) {
         pos.first += x;
     }
 
-    if (pos.second + y >= 0 and pos.second + y < 256) {
+    if (pos.second + y >= 0 and pos.second + y < 512) {
         pos.second += y;
     }
 }
