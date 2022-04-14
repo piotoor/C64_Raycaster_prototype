@@ -10,7 +10,7 @@
 #include <memory>
 
 constexpr int screenWidth = 40;
-constexpr int screenHeight = 24;
+constexpr int screenHeight = 25;
 
 int main()
 {
