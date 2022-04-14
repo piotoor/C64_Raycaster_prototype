@@ -122,6 +122,40 @@ namespace {
 }
 
 namespace {
+    class AngleReduceMirrorTestsFixture :public ::testing::TestWithParam<std::tuple<Angle, uint8_t>> {
+        public:
+            struct toString {
+                template <class ParamType>
+                std::string operator()(const testing::TestParamInfo<ParamType>& testData) const {
+                    const auto &[angle, expected] = testData.param;
+                    return angle.toString() + "_" + Angle(expected).toString();
+                }
+            };
+    };
+
+    INSTANTIATE_TEST_CASE_P(
+        AngleTests,
+        AngleReduceMirrorTestsFixture,
+        ::testing::Values(
+                std::make_tuple(0, 64),
+                std::make_tuple(10, 54),
+                std::make_tuple(64, 0),
+                std::make_tuple(92, 28),
+                std::make_tuple(128, 64),
+                std::make_tuple(156, 36),
+                std::make_tuple(192, 0),
+                std::make_tuple(212, 20)
+        ),
+        AngleReduceMirrorTestsFixture::toString()
+    );
+
+    TEST_P(AngleReduceMirrorTestsFixture, ReduceMirrorTest) {
+        auto &[angle, expected] = GetParam();
+        ASSERT_EQ(angle.getReducedMirrorValue(), expected);
+    }
+}
+
+namespace {
     class AngleQuadrantTestsFixture :public ::testing::TestWithParam<std::tuple<Angle, Quadrant>> {
         public:
             struct toString {

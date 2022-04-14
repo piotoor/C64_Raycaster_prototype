@@ -28,6 +28,7 @@ class Angle {
 
         uint8_t getValue() const;
         uint8_t getReducedValue() const;
+        uint8_t getReducedMirrorValue() const;
         Quadrant getQuadrant() const;
         std::string toString() const;
 

@@ -12,6 +12,11 @@ uint8_t Angle::getReducedValue() const {
     return reducedValue;
 }
 
+uint8_t Angle::getReducedMirrorValue() const {
+    return 64 - reducedValue;
+}
+
+
 Quadrant Angle::getQuadrant() const {
     if (value >= 0 and value < 64) {
         return Quadrant::I;
