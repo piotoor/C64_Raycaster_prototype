@@ -1,6 +1,7 @@
 #include "Ray.h"
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 
 Ray::Ray(const std::shared_ptr<Player> &player, const Angle &theta, const std::shared_ptr<GameMap> &gameMap, const std::shared_ptr<LookUpTables> &lut):
     player(player), theta(theta), gameMap(gameMap), lut(lut) {
@@ -66,9 +67,9 @@ std::tuple<uint8_t, uint8_t, bool> Ray::computeVerticalLine(uint8_t screenHeight
     Angle finalDistTheta = playerTheta.getDist(theta);
 
     uint16_t perpDistance = finalDist / 128 * lut->getCosX128(finalDistTheta.getReducedValue());
+
     uint8_t lineHeight = 0;
-    uint16_t k = 37000 / screenHeight;
-    lineHeight = screenHeight - perpDistance / k;
+    lineHeight =  std::min(32, 0xffff / (perpDistance + 1));
 
 
     std::cout << "id=(" << debugInitDistX << ", " << debugInitDistY << ") dlt=(" << dx << ", " << dy << ") ";
