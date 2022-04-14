@@ -23,6 +23,8 @@ int main()
     sf::RenderWindow window(sf::VideoMode(screenWidth * 16, screenHeight * 16), "piotoor's raycaster");
     window.setFramerateLimit(50);
 
+    const uint8_t speedFactor = 4;
+
     while (window.isOpen())
     {
         window.clear();
@@ -48,6 +50,7 @@ int main()
             player->rotatePly(1);
         }
 
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
             auto playerTheta = player->getTheta();
             int dirX = -1;
@@ -61,9 +64,9 @@ int main()
                 dirY = 1;
             }
 
-            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / 8, dirY * lut->getSinX16(playerTheta.getReducedValue()) / 8};
-            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / 8) / gameMap->squareSize;
-            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / 8)  / gameMap->squareSize;
+            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor, dirY * lut->getSinX16(playerTheta.getReducedValue()) / speedFactor};
+            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor) / gameMap->squareSize;
+            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / speedFactor)  / gameMap->squareSize;
 
             if (not gameMap->board[playerMapY][playerMapX]) {
                 player->movePly(delta);
@@ -84,9 +87,9 @@ int main()
                 dirY = -1;
             }
 
-            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / 8, dirY * lut->getSinX16(playerTheta.getReducedValue()) / 8};
-            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / 8) / gameMap->squareSize;
-            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / 8)  / gameMap->squareSize;
+            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor, dirY * lut->getSinX16(playerTheta.getReducedValue()) / speedFactor};
+            uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor) / gameMap->squareSize;
+            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / speedFactor)  / gameMap->squareSize;
 
             if (not gameMap->board[playerMapY][playerMapX]) {
                 player->movePly(delta);
