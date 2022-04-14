@@ -43,11 +43,11 @@ int main()
         window.display();
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-            player->rotatePly(-1);
+            player->rotatePly(-speedFactor);
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-            player->rotatePly(1);
+            player->rotatePly(speedFactor);
         }
 
 
