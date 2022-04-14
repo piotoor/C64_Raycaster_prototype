@@ -38,7 +38,7 @@ void Raycaster::update(sf::Time elapsed) {
         lines[r * 2].position = sf::Vector2f(r, lineStart);
         lines[r * 2 + 1].position = sf::Vector2f(r, lineEnd);
 
-        sf::Color color = sf::Color::Red;
+        sf::Color color = sf::Color::Cyan;
         uint8_t lineHeight = lineEnd - lineStart;
 
 
@@ -46,6 +46,11 @@ void Raycaster::update(sf::Time elapsed) {
             color.a *= 0.3;
         }
 
+//        if (horizontal != prevHorizontal) {
+//            color = sf::Color::Green;
+//        }
+//
+//        prevHorizontal = horizontal;
 
         lines[r * 2].color = color;
         lines[r * 2 + 1].color = color;
