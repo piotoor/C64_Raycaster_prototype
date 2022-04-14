@@ -64,9 +64,9 @@ int main()
                 dirY = 1;
             }
 
-            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor, dirY * lut->getSinX16(playerTheta.getReducedValue()) / speedFactor};
+            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor, dirY * lut->getCosX16(playerTheta.getReducedMirrorValue()) / speedFactor};
             uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor) / gameMap->squareSize;
-            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / speedFactor)  / gameMap->squareSize;
+            uint8_t playerMapY = (player->getPos().second + dirY * lut->getCosX16(playerTheta.getReducedMirrorValue()) / speedFactor)  / gameMap->squareSize;
 
             if (not gameMap->board[playerMapY][playerMapX]) {
                 player->movePly(delta);
@@ -87,9 +87,9 @@ int main()
                 dirY = -1;
             }
 
-            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor, dirY * lut->getSinX16(playerTheta.getReducedValue()) / speedFactor};
+            PlayerPosDelta delta {dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor, dirY * lut->getCosX16(playerTheta.getReducedMirrorValue()) / speedFactor};
             uint8_t playerMapX = (player->getPos().first + dirX * lut->getCosX16(playerTheta.getReducedValue()) / speedFactor) / gameMap->squareSize;
-            uint8_t playerMapY = (player->getPos().second + dirY * lut->getSinX16(playerTheta.getReducedValue()) / speedFactor)  / gameMap->squareSize;
+            uint8_t playerMapY = (player->getPos().second + dirY * lut->getCosX16(playerTheta.getReducedMirrorValue()) / speedFactor)  / gameMap->squareSize;
 
             if (not gameMap->board[playerMapY][playerMapX]) {
                 player->movePly(delta);

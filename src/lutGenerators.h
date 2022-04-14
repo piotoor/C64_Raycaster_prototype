@@ -8,9 +8,7 @@
 
 namespace lutGenerators {
     std::vector<std::vector<uint16_t>> generateMXOverCos(uint16_t m, uint8_t maxX, uint8_t maxTheta);
-    std::vector<std::vector<uint16_t>> generateMXOverSin(uint16_t m, uint8_t maxX, uint8_t maxTheta);
     std::vector<uint16_t> generateMCos(uint16_t m, uint8_t maxTheta);
-    std::vector<uint16_t> generateMSin(uint16_t m, uint8_t maxTheta);
 
     template <class T>
     void print2DVect(const std::vector<std::vector<T>> &v) {

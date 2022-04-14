@@ -23,17 +23,17 @@ void Ray::computeInitialParameters() {
 
     if (theta.getQuadrant() == Quadrant::I or theta.getQuadrant() == Quadrant::II) {
         stepY = 1;
-        initDistY = lut->getMxOverSin(gameMap->squareSize * (y / gameMap->squareSize + 1) - y, theta.getReducedValue());
+        initDistY = lut->getMxOverCos(gameMap->squareSize * (y / gameMap->squareSize + 1) - y, theta.getReducedMirrorValue());
 
     } else {
         stepY = -1;
-        initDistY = lut->getMxOverSin(y - gameMap->squareSize * (y / gameMap->squareSize), theta.getReducedValue());
+        initDistY = lut->getMxOverCos(y - gameMap->squareSize * (y / gameMap->squareSize), theta.getReducedMirrorValue());
     }
 
     debugInitDistX = initDistX;
     debugInitDistY = initDistY;
     dx = lut->getMxOverCos(gameMap->squareSize, theta.getReducedValue());
-    dy = lut->getMxOverSin(gameMap->squareSize, theta.getReducedValue());
+    dy = lut->getMxOverCos(gameMap->squareSize, theta.getReducedMirrorValue());
 }
 
 void Ray::cast() {
