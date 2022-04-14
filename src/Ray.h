@@ -31,9 +31,6 @@ class Ray {
         uint8_t stepY = 0;
         uint16_t dx = 0;
         uint16_t dy = 0;
-//        uint16_t initDistX = 0;
-//        uint16_t initDistY = 0;
-//        uint16_t finalDist = 0;
         uint16_t initDistX = 0;
         uint16_t initDistY = 0;
         uint16_t finalDist = 0;

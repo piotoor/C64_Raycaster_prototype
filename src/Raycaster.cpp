@@ -24,7 +24,7 @@ void Raycaster::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 void Raycaster::update(sf::Time elapsed) {
     generateDebugMap();
-    bool prevHorizontal = false;
+
     for (size_t r = 0; r < screenWidth; ++r) {
 
         Angle rayTheta = player->getTheta() - player->getFov() / 2 + r ;
@@ -45,12 +45,6 @@ void Raycaster::update(sf::Time elapsed) {
         if (horizontal) {
             color.a *= 0.3;
         }
-
-//        if (horizontal != prevHorizontal) {
-//            color = sf::Color::Green;
-//        }
-//
-//        prevHorizontal = horizontal;
 
         lines[r * 2].color = color;
         lines[r * 2 + 1].color = color;
