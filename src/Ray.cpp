@@ -69,16 +69,18 @@ std::tuple<uint8_t, uint8_t, bool> Ray::computeVerticalLine(uint8_t screenHeight
     uint16_t perpDistance = finalDist / 128 * lut->getCosX128(finalDistTheta.getReducedValue());
 
     uint8_t lineHeight = 0;
-    lineHeight =  std::min(32, 0xffff / (perpDistance + 1));
+    lineHeight =  std::min(static_cast<int>(screenHeight), 0xffff / (perpDistance + 1));
 
 
     std::cout << "id=(" << debugInitDistX << ", " << debugInitDistY << ") dlt=(" << dx << ", " << dy << ") ";
     std::cout << "[finalDistTheta=" << (int)finalDistTheta.getReducedValue() << "], ";
     std::cout << "hit=(" << (int)mapX << "; " << (int)mapY << ") ";
     std::cout << "debug(x,y)=(" << (int)debugX << ", " << (int)debugY << ") ";
-    std::cout << "d=" << perpDistance << "(" << finalDist << "), h=" << (int) lineHeight << ", th=" << theta.toString() << "[" << (int)theta.getReducedValue() << "]" << std::endl;;
+    std::cout << "d=" << perpDistance << "(" << finalDist << "), h=" << (int) lineHeight;
+    std::cout << " (" << screenHeight / 2 - lineHeight / 2 << "; " <<  screenHeight / 2 + lineHeight / 2 << ": " << horizontal << ")";
+    std::cout << ", th=" << theta.toString() << "[" << (int)theta.getReducedValue() << "]" << std::endl;;
 
-    return std::make_tuple<uint8_t, uint8_t>(std::max(0, screenHeight / 2 - lineHeight / 2), std::min(screenHeight / 2 + lineHeight / 2, screenHeight - 1), horizontal);
+    return std::make_tuple<uint8_t, uint8_t>(screenHeight / 2 - lineHeight / 2, screenHeight / 2 + lineHeight / 2, horizontal);
 }
 
 std::pair<uint8_t, uint8_t> Ray::getHitPlace() {
